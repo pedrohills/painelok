@@ -29,14 +29,14 @@
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="mdi-social-person prefix"></i>
-                            <input id="icon_prefix" type="text" name="usuario" class="validate" required>
+                            <input id="icon_prefix" type="text" name="usuario" id="usuario" class="validate" required>
                             <label for="usuario">Nome de usuário</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s12">
                             <i class="mdi-action-lock-outline prefix"></i>
-                            <input id="icon_prefix" type="password" name="senha" class="validate" required>
+                            <input id="icon_prefix" type="password" name="senha" id="senha" class="validate" required>
                             <label for="senha">Senha</label>
                         </div>
                     </div>
