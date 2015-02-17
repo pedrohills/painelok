@@ -45,7 +45,7 @@
       $where = array ("id" => $decoded_user_id);  
       
       // Pegando as informações do usuário no banco de dados
-      $user_info = $CI->crud_model->get ($where_array);
+      $user_info = $CI->crud_model->retrieve ('usuarios', $where_array);
       
       // Verificando se retornou algum valor
       if ($user_info)
@@ -56,7 +56,7 @@
         $user_info = $user_info[0];
         
         // Verificando se o usuário está bloqueado de acessar o painel...
-        if ($user_info["banned"])
+        if ($user_info["bloqueado"])
         {
         
             // Loop em todos os campos...
