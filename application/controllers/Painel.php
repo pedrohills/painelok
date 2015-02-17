@@ -23,6 +23,18 @@ class Painel extends CI_Controller {
       $this->load->view('painel-index');
       
   }
+
+  public function gerar($senha){
+
+      for ($i = 0; $i < 10; $i++)
+      {
+
+          $senha = md5($senha);
+
+      }
+      echo $senha;
+
+  }
   
 	public function entrar()
 	{
@@ -38,21 +50,20 @@ class Painel extends CI_Controller {
           // Verificando se o formulário foi validado..
           if($this->form_validation->run() === TRUE)
           {
-
-              /*
+              
+              // Criptografa a senha 10 vezes..
               $senha = $this->input->post('senha');
               for ($i = 0; $i < 10; $i++)
               {
 
                   $senha = md5($senha);
 
-              }
-              */
+              }              
 
               // Organizando o where da busca no banco de dados.
               $where = array(
                   "usuario" => $this->input->post('usuario'),
-                  "senha"   => $this->input->post('senha')
+                  "senha"   => $senha
               );
 
               // Executando a função do model, passando como parâmetro
