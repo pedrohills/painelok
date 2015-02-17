@@ -1,30 +1,29 @@
 <?php
 
   // Verifica se o usuário está logado
-  function check_session($update = FALSE)
+  function check_session_painel()
   {
       // Instancia da classe principal do CodeIgniter
       $CI =& get_instance();      
       
       // Verifica se o usuário está logado..
       if ($CI->session->userdata("logado"))
-      {
+          redirect('admin');
 
-          // Verifica se será necessário atualizar a sessão..
-          if( ! $update) return;
-          
-          // Atualiza a sessão..
+  }
+
+  // Verifica se o usuário está logado
+  function check_session_admin()
+  {
+      // Instancia da classe principal do CodeIgniter
+      $CI =& get_instance();      
+      
+      // Verifica se o usuário está logado..
+      if ( ! $CI->session->userdata("logado"))
+          redirect('painel');
+      else
           update_session();
 
-      }
-      else
-      {
-
-          // Redireciona para o logout caso não esteja logado, em seguida
-          // será redirecionado para o formulário de login..
-          logout_session();
-
-      }
   }
   
   function update_session()
@@ -45,18 +44,18 @@
       $where = array ("id" => $decoded_user_id);  
       
       // Pegando as informações do usuário no banco de dados
-      $user_info = $CI->crud_model->retrieve ('usuarios', $where_array);
+      $user_info = $CI->crud_model->retrieve ('usuarios', $where);
       
       // Verificando se retornou algum valor
       if ($user_info)
       {
       
         // Aqui estamos apenas armazenando as informações do usuário
-        // que vem no primeiro indice do array após feito o get do model...
+        // que vem no primeiro indice do array após feito o retrieve no model...
         $user_info = $user_info[0];
         
         // Verificando se o usuário está bloqueado de acessar o painel...
-        if ($user_info["bloqueado"])
+        if ( ! $user_info["bloqueado"])
         {
         
             // Loop em todos os campos...
@@ -89,7 +88,7 @@
             
             // Ajustando um campo adicional para checagem
             // da sessão..
-            $config_sessao['logado'] = true;
+            $config_sessao['logado'] = TRUE;
             
             // Atualiza a sessão..
             $CI->session->set_userdata($config_sessao);
@@ -118,10 +117,13 @@
   function logout_session()
   {
 
+      // Instancia da classe principal do CodeIgniter
+      $CI =& get_instance();
+
       // Destrói a sessão..
-      $this->session->sess_destroy();
+      $CI->session->sess_destroy();
 
       // Redireciona para o formulário de login..
-      redirect ('painel/entrar');
+      redirect ('painel');
 
   }

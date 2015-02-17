@@ -3,18 +3,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Crud_model extends CI_Model {
 
-  public function create($table, $array)
+  public function create ($table, $array)
   {
 
       // Executa o insert..
-      $this->db->insert($table, $array);
+      $this->db->insert ($table, $array);
 
       // Retorna o ID da inserção..
-      return this->db->insert_id()
+      return $this->db->insert_id();
 
   }
   
-  public function retrieve($table, $where = NULL)
+  public function retrieve ($table, $where = NULL)
   {
 
     // Ajustando a clausula da pesquisa
@@ -25,26 +25,29 @@ class Crud_model extends CI_Model {
     $query = $this->db->get ($table);
 
     // Retornando os resultados...
-    return $query->result_array();
+    if($query->num_rows() > 0)
+      return $query->result_array();
+    else
+      return FALSE;
 
   }
 
-  public function update($table, $array, $where)
+  public function update ($table, $array, $where)
   {
 
       // Executa o update..
-      $this->db->update($table, $array, $where);
+      $this->db->update ($table, $array, $where);
 
       // Apenas para retornar..
       return TRUE;
 
   }
 
-  public function delete($table, $where)
+  public function delete ($table, $where)
   {
 
     // Executa o delete
-    $this->db->delete($table, $where);
+    $this->db->delete ($table, $where);
 
     // Apenas para retornar..
     return TRUE;
