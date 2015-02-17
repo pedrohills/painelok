@@ -127,3 +127,17 @@
       redirect ('painel');
 
   }
+
+  function redirect_session($url, $dados)
+  {
+
+      // Instancia da classe principal do CodeIgniter
+      $CI =& get_instance();
+
+      // Inicia a sessão temporária
+      $CI->session->set_flashdata('dados', $dados);
+
+      // Redireciona para o formulário...
+      redirect($url); 
+
+  }

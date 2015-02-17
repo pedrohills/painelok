@@ -47,6 +47,9 @@ class Painel extends CI_Controller {
           $this->form_validation->set_rules('usuario', '<strong>usuário</strong>', 'required|trim|min_length[6]|max_length[50]');
           $this->form_validation->set_rules('senha', '<strong>senha</strong>', 'required|trim|min_length[6]');
 
+          // Alterando os delimitadores de erro...
+          $this->form_validation->set_error_delimiters('','<br>');
+
           // Verificando se o formulário foi validado..
           if($this->form_validation->run() === TRUE)
           {
@@ -126,16 +129,15 @@ class Painel extends CI_Controller {
                   {
 
                       // Mensagem que vai ser armazenada na sessão temporária
-                      $mensagem = array(
+                      $dados = array(
                         "mensagem"  => "<strong>Usuário sem acesso ao sistema!</strong>",
-                        "class"     => "card-panel red darken-1 red-text text-lighten-4"
+                        "class"     => "card-panel red darken-1 red-text text-lighten-4",
+                        "form"      => $this->input->post()
                       );
 
-                      // Inicia a sessão temporária
-                      $this->session->set_flashdata('mensagem', $mensagem);
-
-                      // Redireciona para o formulário...
-                      redirect('painel'); 
+                      // Utiliza o helper para criar uma sessão temporária
+                      // passando o controller e os dados para a sessão..
+                      redirect_session('painel', $dados);
 
                   }
 
@@ -144,16 +146,15 @@ class Painel extends CI_Controller {
               {
 
                   // Mensagem que vai ser armazenada na sessão temporária
-                  $mensagem = array(
+                  $dados = array(
                     "mensagem"  => "<strong>Dados inválidos!</strong>",
-                    "class"     => "card-panel red darken-1 red-text text-lighten-4"
+                    "class"     => "card-panel red darken-1 red-text text-lighten-4",
+                    "form"      => $this->input->post()
                   );
 
-                  // Inicia a sessão temporária
-                  $this->session->set_flashdata('mensagem', $mensagem);
-
-                  // Redireciona para o formulário...
-                  redirect('painel'); 
+                  // Utiliza o helper para criar uma sessão temporária
+                  // passando o controller e os dados para a sessão..
+                  redirect_session('painel', $dados);
 
               }
 
@@ -162,16 +163,15 @@ class Painel extends CI_Controller {
           {
 
               // Mensagem que vai ser armazenada na sessão temporária
-              $mensagem = array(
+              $dados = array(
                 "mensagem"  => "<strong>Falha na validação do formulário!</strong><br>". validation_errors(),
-                "class"    => "card-panel red darken-1 red-text text-lighten-4"
+                "class"     => "card-panel red darken-1 red-text text-lighten-4",
+                "form"      => $this->input->post()
               );
 
-              // Inicia a sessão temporária
-              $this->session->set_flashdata('mensagem', $mensagem);
-
-              // Redireciona para o formulário...
-              redirect('painel');
+              // Utiliza o helper para criar uma sessão temporária
+              // passando o controller e os dados para a sessão..
+              redirect_session('painel', $dados);
 
           }
 
