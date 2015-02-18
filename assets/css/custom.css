@@ -1,0 +1,15 @@
+.no-padding{padding:0 !important;}
+.no-padding-top{padding-top:0 !important;}
+.no-padding-bottom{padding-bottom:0 !important;}
+
+.no-margin{margin:0 !important;}
+.no-margin-top{margin-top:0 !important;}
+.no-margin-bottom{margin-bottom:0 !important;}
+
+.dropdown-menu-button{display: block;width: 100%;padding: 10px 0 10px 45px;text-transform: none !Important;}
+.dropdown-menu-button i{margin-right: 1rem !important;}
+
+.cursor{cursor:pointer;}
+
+.card .card-content .card-title {line-height: 30px;}
+.card .card-content p {margin-top: 15px;}

@@ -17,12 +17,12 @@ class Admin extends CI_Controller {
   
   public function index()
   {
-      echo 'Usuário autenticado com sucesso! Olá: ';
-      echo  $this->session->userdata('nome') ? $this->session->userdata('nome') : $this->session->userdata('usuario');
+      $nome = $this->session->userdata('nome') ? $this->session->userdata('nome') : $this->session->userdata('usuario');
 
-      echo '<br>';
-
-      var_dump($this->session->userdata());
+      $this->load->view('admin/header');
+      $this->load->view('admin/sidebar');
+      $this->load->view('admin/index');
+      $this->load->view('admin/footer');
   }
 
 }

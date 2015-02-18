@@ -6,8 +6,8 @@
       // Instancia da classe principal do CodeIgniter
       $CI =& get_instance();      
       
-      // Verifica se o usuário está logado..
-      if ($CI->session->userdata("logado"))
+      // Verifica se o usuário está logado e se ele não quer desconectar...
+      if ($CI->session->userdata("logado") && $CI->uri->segment(2) !== "sair")
           redirect('admin');
 
   }
